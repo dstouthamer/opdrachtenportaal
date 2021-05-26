@@ -36,11 +36,11 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
 		header('Location: home.php');
 	} else {
 		// Wrong password
-		echo 'Incorrect username and/or password!';
+		echo 'Incorrect password!';
 	}
 } else {
 	// Wrong username
-	echo 'Incorrect username and/or password!';
+	echo 'Incorrect username';
 }
 
 	$stmt->close();
