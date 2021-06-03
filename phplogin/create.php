@@ -1,76 +1,53 @@
-<?php
-session_start();
-// If user is not logged in send to login page...
-if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.html');
-	exit;
-}
-$DATABASE_HOST = 'localhost';
-$DATABASE_USER = 'root';
-$DATABASE_PASS = '';
-$DATABASE_NAME = 'phplogin';
-$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-if (mysqli_connect_errno()) {
-	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
-}
-$stmt = $con->prepare('SELECT password, email FROM accounts WHERE id = ?');
-$stmt->bind_param('i', $_SESSION['id']);
-$stmt->execute();
-$stmt->bind_result($password, $email);
-$stmt->fetch();
-$stmt->close();
-?>
+
 <?php
 // Include config file
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$name = $address = $salary = "";
-$name_err = $address_err = $salary_err = "";
+$vakgebied = $vragen = $bestanden = "";
+$vakgebied_err = $vragen_err = $bestanden_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate name
-    $input_name = trim($_POST["name"]);
-    if(empty($input_name)){
-        $name_err = "Please enter a name.";
-    } elseif(!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
-        $name_err = "Please enter a valid name.";
+    $input_vakgebied = trim($_POST["vakgebied"]);
+    if(empty($input_vakgebied)){
+        $vakgebied_err = "Please enter a name.";
+    } elseif(!filter_var($input_vakgebied, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+        $vakgebied_err = "Please enter a valid name.";
     } else{
-        $name = $input_name;
+        $vakgebied = $input_vakgebied;
     }
     
     // Validate address
-    $input_address = trim($_POST["address"]);
-    if(empty($input_address)){
-        $address_err = "Please enter an address.";     
+    $input_vragen = trim($_POST["vragen"]);
+    if(empty($input_vragen)){
+        $vragen_err = "Vul vragen in.";     
     } else{
-        $address = $input_address;
+        $vragen = $input_vragen;
     }
     
     // Validate salary
-    $input_salary = trim($_POST["salary"]);
-    if(empty($input_salary)){
-        $salary_err = "Please enter the salary amount.";     
-    } elseif(!ctype_digit($input_salary)){
-        $salary_err = "Please enter a positive integer value.";
-    } else{
-        $salary = $input_salary;
+    $input_bestanden = trim($_POST["bestanden"]);
+    if(empty($input_bestanden)){
+        $bestanden_err = "Please enter the salary amount.";     
+    }else{
+        $bestanden = $input_bestanden;
     }
     
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($address_err) && empty($salary_err)){
+    if(empty($vakgebied_err) && empty($vragen_err) && empty($bestanden_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO employees (name, address, salary) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO opdrachten (vakgebied, vragen, bestanden) VALUES (?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_address, $param_salary);
+            mysqli_stmt_bind_param($stmt, "sss", $param_vakgebied, $param_vragen, $param_bestanden);
             
             // Set parameters
-            $param_name = $name;
-            $param_address = $address;
-            $param_salary = $salary;
+            $param_vakgebied = $vakgebied;
+            $param_vragen = $vragen;
+            $param_bestanden = $bestanden;
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -103,32 +80,41 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             margin: 0 auto;
         }
     </style>
+    <link href="style.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 </head>
-<body>
+<body class="loggedin">
+		<nav class="navtop">
+			<div>
+				<h1>Defensie opdrachtenportaal</h1>
+                <a href="entry.php">Home</a>
+				<a href="opdrachten.php"><i class="fas fa-user-circle"></i>Opdrachten</a>
+				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
+			</div>
+		</nav>
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5">Create Record</h2>
-                    <p>Please fill this form and submit to add employee record to the database.</p>
+                    <h2 class="mt-5">Maak opdracht aan</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
-                            <span class="invalid-feedback"><?php echo $name_err;?></span>
+                            <label>Vakgebied</label>
+                            <input type="text" name="vakgebied" class="form-control <?php echo (!empty($vakgebied_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $vakgebied; ?>">
+                            <span class="invalid-feedback"><?php echo $vakgebied_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Address</label>
-                            <textarea name="address" class="form-control <?php echo (!empty($address_err)) ? 'is-invalid' : ''; ?>"><?php echo $address; ?></textarea>
-                            <span class="invalid-feedback"><?php echo $address_err;?></span>
+                            <label>Vragen</label>
+                            <textarea name="vragen" class="form-control <?php echo (!empty($vragen_err)) ? 'is-invalid' : ''; ?>"><?php echo $vragen; ?></textarea>
+                            <span class="invalid-feedback"><?php echo $vragen_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Salary</label>
-                            <input type="text" name="salary" class="form-control <?php echo (!empty($salary_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $salary; ?>">
-                            <span class="invalid-feedback"><?php echo $salary_err;?></span>
+                            <label>Bestanden</label>
+                            <input type="file" name="bestanden" class="form-control <?php echo (!empty($bestanden_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $bestanden; ?>">
+                            <span class="invalid-feedback"><?php echo $bestanden_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
+                        <a href="entry.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
                 </div>
             </div>        
