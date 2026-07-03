@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GDH_THEME_VERSION', '1.0.0' );
+define( 'GDH_THEME_VERSION', '1.0.1' );
 
 require_once get_template_directory() . '/inc/customizer.php';
 require_once get_template_directory() . '/inc/contact-form.php';
