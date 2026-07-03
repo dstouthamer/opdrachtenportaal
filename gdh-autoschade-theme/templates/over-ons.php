@@ -46,7 +46,7 @@ while ( have_posts() ) :
 					</div>
 
 					<div>
-						<img src="<?php echo esc_url( gdh_image( 'pand', 'pand.svg' ) ); ?>" alt="<?php esc_attr_e( 'Het pand van GDH Autoschade in Apeldoorn', 'gdh-autoschade' ); ?>" style="border-radius: 14px; margin-bottom: 22px;">
+						<img src="<?php echo esc_url( gdh_image( 'pand', 'pand.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Het pand van GDH Autoschade in Apeldoorn', 'gdh-autoschade' ); ?>" style="border-radius: 14px; margin-bottom: 22px;">
 						<?php get_template_part( 'template-parts/info-card' ); ?>
 					</div>
 				</div>

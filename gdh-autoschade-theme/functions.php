@@ -44,7 +44,6 @@ add_action( 'after_setup_theme', 'gdh_setup' );
  * Enqueue styles & scripts.
  */
 function gdh_assets() {
-	wp_enqueue_style( 'gdh-fonts', 'https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap', array(), null );
 	wp_enqueue_style( 'gdh-style', get_stylesheet_uri(), array(), GDH_THEME_VERSION );
 	wp_enqueue_script( 'gdh-main', get_template_directory_uri() . '/js/main.js', array(), GDH_THEME_VERSION, true );
 }

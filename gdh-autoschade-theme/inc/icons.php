@@ -25,6 +25,7 @@ function gdh_icon( $name ) {
 		'clock'     => '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
 		'check'     => '<path d="m4 12 5 5L20 6"/>',
 		'arrow'     => '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>',
+		'arrows'    => '<path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/>',
 		'calendar'  => '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
 		'car'       => '<path d="M5 11 6.5 6.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11"/><path d="M3 13a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4h-2m-14 0H3v-4z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>',
 		'camper'    => '<path d="M2 16V8a2 2 0 0 1 2-2h11l5 4h1a1 1 0 0 1 1 1v5h-2"/><path d="M2 16h4m4 0h6"/><circle cx="8" cy="17" r="2"/><circle cx="18" cy="17" r="2"/><path d="M9 6v4H2m13-4v4h5"/>',

@@ -36,7 +36,7 @@ get_header();
 					</div>
 				</div>
 				<div class="gdh-hero__media">
-					<img src="<?php echo esc_url( gdh_image( 'hero', 'hero.svg' ) ); ?>" alt="<?php esc_attr_e( 'Auto en camper in de werkplaats van GDH Autoschade', 'gdh-autoschade' ); ?>">
+					<img src="<?php echo esc_url( gdh_image( 'hero', 'hero.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Auto en camper in de werkplaats van GDH Autoschade', 'gdh-autoschade' ); ?>">
 				</div>
 			</div>
 
@@ -137,7 +137,7 @@ get_header();
 				</div>
 
 				<div class="gdh-about__media">
-					<img src="<?php echo esc_url( gdh_image( 'pand', 'pand.svg' ) ); ?>" alt="<?php esc_attr_e( 'Het pand van GDH Autoschade in Apeldoorn', 'gdh-autoschade' ); ?>">
+					<img src="<?php echo esc_url( gdh_image( 'pand', 'pand.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Het pand van GDH Autoschade in Apeldoorn', 'gdh-autoschade' ); ?>">
 					<div class="gdh-about__contactcard">
 						<div class="gdh-contactline">
 							<?php gdh_the_icon( 'phone' ); ?>
@@ -221,9 +221,9 @@ get_header();
 			<div class="gdh-reviews__grid">
 				<?php
 				$gdh_reviews = array(
-					array( __( 'Topservice! Mijn auto ziet er weer als nieuw uit. Snelle communicatie en helder advies.', 'gdh-autoschade' ), 'Mark de Vries', 'Apeldoorn' ),
-					array( __( 'Deskundig team en perfect herstel van onze camper. Echte vakmensen met passie!', 'gdh-autoschade' ), 'Fam. Jansen', 'Beekbergen' ),
-					array( __( 'Duidelijke afspraken, snel geholpen en geen verrassingen achteraf. Zeer tevreden!', 'gdh-autoschade' ), 'S. van Dijk', 'Apeldoorn' ),
+					array( __( 'Topservice! Mijn auto ziet er weer als nieuw uit. Snelle communicatie en helder advies.', 'gdh-autoschade' ), 'Mark de Vries', 'Apeldoorn', 'avatar1.jpg' ),
+					array( __( 'Deskundig team en perfect herstel van onze camper. Echte vakmensen met passie!', 'gdh-autoschade' ), 'Fam. Jansen', 'Beekbergen', 'avatar2.jpg' ),
+					array( __( 'Duidelijke afspraken, snel geholpen en geen verrassingen achteraf. Zeer tevreden!', 'gdh-autoschade' ), 'S. van Dijk', 'Apeldoorn', 'avatar3.jpg' ),
 				);
 				foreach ( $gdh_reviews as $gdh_review ) :
 					?>
@@ -233,19 +233,17 @@ get_header();
 						</div>
 						<p><?php echo esc_html( $gdh_review[0] ); ?></p>
 						<div class="gdh-review__author">
-							<span class="gdh-review__avatar"><?php echo esc_html( strtoupper( mb_substr( $gdh_review[1], 0, 1 ) ) ); ?></span>
+							<img class="gdh-review__avatar" src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/' . $gdh_review[3] ); ?>" alt="">
 							<span><strong><?php echo esc_html( $gdh_review[1] ); ?></strong><small><?php echo esc_html( $gdh_review[2] ); ?></small></span>
 						</div>
 					</div>
 				<?php endforeach; ?>
 
 				<div class="gdh-beforeafter">
-					<div class="gdh-ba" data-ba>
-						<img class="gdh-ba__after" src="<?php echo esc_url( gdh_image( 'after', 'na.svg' ) ); ?>" alt="<?php esc_attr_e( 'Auto na het herstel', 'gdh-autoschade' ); ?>">
-						<img class="gdh-ba__before" src="<?php echo esc_url( gdh_image( 'before', 'voor.svg' ) ); ?>" alt="<?php esc_attr_e( 'Auto met schade, voor het herstel', 'gdh-autoschade' ); ?>">
-						<span class="gdh-ba__label gdh-ba__label--before"><?php esc_html_e( 'Voor', 'gdh-autoschade' ); ?></span>
-						<span class="gdh-ba__label gdh-ba__label--after"><?php esc_html_e( 'Na', 'gdh-autoschade' ); ?></span>
-						<div class="gdh-ba__handle"></div>
+					<div class="gdh-ba-pair">
+						<img src="<?php echo esc_url( gdh_image( 'before', 'voor.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Auto met schade, voor het herstel', 'gdh-autoschade' ); ?>">
+						<img src="<?php echo esc_url( gdh_image( 'after', 'na.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Auto na het herstel', 'gdh-autoschade' ); ?>">
+						<span class="gdh-ba-pair__btn" aria-hidden="true"><?php gdh_the_icon( 'arrows' ); ?></span>
 					</div>
 					<a class="gdh-beforeafter__link" href="<?php echo esc_url( gdh_page_url( 'over-ons' ) ); ?>">
 						<?php esc_html_e( 'Bekijk meer voor & na projecten', 'gdh-autoschade' ); ?>
@@ -261,9 +259,7 @@ get_header();
 		<div class="gdh-container">
 			<span class="gdh-kicker"><?php esc_html_e( 'Vertrouwd door topmerken', 'gdh-autoschade' ); ?></span>
 			<div class="gdh-brands__row">
-				<?php foreach ( array( 'BMW', 'Mercedes-Benz', 'Audi', 'Volkswagen', 'Škoda', 'Seat', 'Fiat', 'Ford', 'Opel' ) as $gdh_brand ) : ?>
-					<span class="gdh-brand"><?php echo esc_html( $gdh_brand ); ?></span>
-				<?php endforeach; ?>
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/merken.jpg' ); ?>" alt="<?php esc_attr_e( 'Logo\'s van BMW, Mercedes-Benz, Audi, Volkswagen, Škoda, Seat, Fiat, Ford en Opel', 'gdh-autoschade' ); ?>">
 			</div>
 		</div>
 	</section>
